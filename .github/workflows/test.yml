@@ -1,18 +1,38 @@
 name: Compile and capture all 40 exercises
 on:
   push:
+    paths-ignore:
+      - 'Q*/output.txt'
+      - 'Q*/output.png'
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   compiler-lab:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y flex gcc imagemagick fonts-dejavu-core
-      - run: bash run_all.sh
-      - uses: actions/upload-artifact@v4
+      - name: Install C and FLEX
+        run: sudo apt-get update && sudo apt-get install -y flex gcc python3-pil fonts-dejavu-core
+      - name: Compile and run all programs
+        run: bash run_all.sh
+      - name: Render terminal-style PNG screenshots from real program outputs
+        run: python3 scripts/generate_screenshots.py
+      - name: Upload all results as downloadable workflow artifact
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: outputs-and-screenshots
           path: |
             Q*/output.txt
             Q*/output.png
+      - name: Commit generated outputs and screenshots to repository
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Q*/output.txt Q*/output.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Add verified execution outputs and screenshots for all 40 exercises"
+            git push
+          fi
