@@ -1,0 +1,2 @@
+int x; /* declared */
+x=1;//assign

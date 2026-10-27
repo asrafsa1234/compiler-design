@@ -1,0 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+int main(void){puts("S -> iEtS S2 | a\nS2 -> eS | epsilon\nE -> b");
+return 0;}

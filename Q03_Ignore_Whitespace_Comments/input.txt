@@ -1,0 +1,2 @@
+int   x = 10; // demo
+int y = 4;
