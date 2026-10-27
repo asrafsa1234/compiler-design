@@ -1,0 +1,3 @@
+FIRST(A) = { epsilon }
+FIRST(B) = { epsilon }
+FIRST(S) = { a, b }

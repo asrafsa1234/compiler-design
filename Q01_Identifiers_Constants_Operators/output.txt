@@ -1,0 +1,5 @@
+Identifier: sum
+Operator: =
+Constant: 12
+Operator: +
+Identifier: count

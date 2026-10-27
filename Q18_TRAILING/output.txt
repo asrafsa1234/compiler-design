@@ -1,0 +1,3 @@
+TRAILING(E) = { +, *, ), id }
+TRAILING(T) = { *, ), id }
+TRAILING(F) = { ), id }

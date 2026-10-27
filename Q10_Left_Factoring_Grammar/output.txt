@@ -1,0 +1,3 @@
+S -> iEtS S2 | a
+S2 -> eS | epsilon
+E -> b

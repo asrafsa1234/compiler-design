@@ -1,0 +1,3 @@
+LEADING(E) = { +, *, (, id }
+LEADING(T) = { *, (, id }
+LEADING(F) = { (, id }
